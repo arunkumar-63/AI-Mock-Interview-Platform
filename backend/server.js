@@ -47,13 +47,16 @@ let isDatabaseConnected = false;
 
 const connectDatabase = async () => {
   try {
-    // Try to connect to local MongoDB first, then fallback to Atlas
+    // Log the MongoDB URI being used (masking sensitive info)
     const mongoUri = process.env.MONGODB_URI || 'mongodb://localhost:27017/interview_ai';
+    console.log('🔄 Attempting to connect to MongoDB...');
+    console.log('📍 MongoDB URI (masked):', mongoUri.replace(/\/\/(.*?):(.*?)@/, '//****:****@'));
+    console.log('🔧 Environment:', process.env.NODE_ENV || 'development');
     
     await mongoose.connect(mongoUri, {
       useNewUrlParser: true,
       useUnifiedTopology: true,
-      serverSelectionTimeoutMS: 5000, // 5 second timeout
+      serverSelectionTimeoutMS: 10000, // 10 second timeout
       socketTimeoutMS: 45000, // 45 second timeout
     });
     
@@ -78,10 +81,12 @@ const connectDatabase = async () => {
     
   } catch (err) {
     console.error('❌ MongoDB connection failed:', err.message);
+    console.error('📋 Error details:', err);
     console.log('⚠️ Continuing without database connection for development...');
     console.log('💡 To fix this, you can:');
     console.log('   1. Install MongoDB locally: https://docs.mongodb.com/manual/installation/');
     console.log('   2. Or update your MONGODB_URI in .env file with a valid connection string');
+    console.log('   3. Check that your MongoDB Atlas cluster is configured to accept connections');
     isDatabaseConnected = false;
   }
 };
