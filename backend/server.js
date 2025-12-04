@@ -6,7 +6,16 @@ const compression = require('compression');
 const morgan = require('morgan');
 const rateLimit = require('express-rate-limit');
 const path = require('path');
-require('dotenv').config();
+
+// Load environment variables
+if (process.env.NODE_ENV !== 'production') {
+  require('dotenv').config();
+} else {
+  // In production, environment variables should be set by the platform (Render)
+  console.log('🔧 Running in production mode. Environment variables should be set by platform.');
+  console.log('🔑 MONGODB_URI is set:', !!process.env.MONGODB_URI);
+  console.log('🔐 JWT_SECRET is set:', !!process.env.JWT_SECRET);
+}
 
 const app = express();
 // Use PORT from environment variable or default to 10000 for Render, 5001 for local development
@@ -53,6 +62,7 @@ const connectDatabase = async () => {
     console.log('🔄 Attempting to connect to MongoDB...');
     console.log('📍 MongoDB URI (masked):', mongoUri.replace(/\/\/(.*?):(.*?)@/, '//****:****@'));
     console.log('🔧 Environment:', process.env.NODE_ENV || 'development');
+    console.log('🔍 MONGODB_URI from env:', !!process.env.MONGODB_URI);
     
     await mongoose.connect(mongoUri, {
       useNewUrlParser: true,
