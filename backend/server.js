@@ -9,7 +9,8 @@ const path = require('path');
 require('dotenv').config();
 
 const app = express();
-const PORT = process.env.PORT || 5001;
+// Use PORT from environment variable or default to 10000 for Render, 5001 for local development
+const PORT = process.env.PORT || (process.env.NODE_ENV === 'production' ? 10000 : 5001);
 
 // Import routes
 const authRoutes = require('./src/routes/auth');
