@@ -1,0 +1,42 @@
+# Dependencies
+node_modules/
+package-lock.json
+
+# Environment variables
+.env
+.env.*
+!env.example
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+.env.backup
+.env.new
+
+# Build outputs
+client/build/
+dist/
+*.log
+
+# Uploads (user-generated content)
+backend/uploads/
+
+# IDE and OS files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+Thumbs.db
+
+# Testing
+coverage/
+.nyc_output/
+
+# Temporary files
+*.tmp
+*.temp
+.cache/
+*_patch.js
+test_*.js

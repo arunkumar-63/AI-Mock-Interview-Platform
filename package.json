@@ -1,0 +1,33 @@
+{
+  "name": "ai-mock-interview-platform",
+  "version": "1.0.0",
+  "description": "AI Mock Interview Platform with Frontend and Backend",
+  "main": "index.js",
+  "scripts": {
+    "start": "concurrently \"npm run server\" \"npm run client\"",
+    "server": "cd backend && npm start",
+    "client": "cd client && npm start",
+    "dev": "concurrently \"npm run server:dev\" \"npm run client:dev\"",
+    "server:dev": "cd backend && npm run dev",
+    "client:dev": "cd client && npm start",
+    "install-all": "npm install && cd backend && npm install && cd ../client && npm install",
+    "build": "cd client && npm run build",
+    "test": "cd backend && npm test"
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.0"
+  },
+  "keywords": [
+    "ai",
+    "interview",
+    "mock",
+    "resume",
+    "analytics",
+    "fullstack"
+  ],
+  "author": "Your Name",
+  "license": "MIT",
+  "dependencies": {
+    "axios": "^1.11.0"
+  }
+}
