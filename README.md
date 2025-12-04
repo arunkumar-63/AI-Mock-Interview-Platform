@@ -183,6 +183,39 @@ ANALYTICS_RETENTION_DAYS=90
 4. Add tests if applicable
 5. Submit a pull request
 
+## Deployment
+
+### Deploy to Render (Recommended)
+
+This application is configured for easy deployment to Render using the `render.yaml` file.
+
+1. Fork this repository to your GitHub account
+2. Sign up for a free account at [render.com](https://render.com)
+3. Click "New Web Service" and connect your GitHub account
+4. Select your forked repository
+5. Render will automatically detect the `render.yaml` configuration
+6. Add the required environment variables:
+   - `MONGODB_URI`: Your MongoDB connection string
+   - `JWT_SECRET`: A secure secret key for JWT tokens
+   - `GEMINI_API_KEY`: Your Google Gemini API key
+7. Click "Create Web Service"
+
+The application will automatically deploy both the frontend and backend services.
+
+### Manual Deployment
+
+If you prefer to deploy manually:
+
+#### Backend Deployment
+1. Deploy the `backend` directory to any Node.js hosting service
+2. Set the required environment variables
+3. Ensure the PORT is configured correctly (Render uses 10000)
+
+#### Frontend Deployment
+1. Build the React app: `cd client && npm run build`
+2. Deploy the `build` directory to any static hosting service
+3. Set the `REACT_APP_API_URL` environment variable to your backend URL
+
 ## License
 
 This project is licensed under the MIT License. 
